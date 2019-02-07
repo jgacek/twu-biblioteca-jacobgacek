@@ -10,6 +10,10 @@ public class BibliotecaApp {
         this.printStream = printStream;
     }
 
+    public void printListOfBooks() {
+        printStream.println("The Lightning Thief \n Harry Potter \n Narnia");
+    }
+
 
     public void printWelcomeMessage () {
         printStream.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
