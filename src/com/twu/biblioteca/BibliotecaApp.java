@@ -11,7 +11,17 @@ public class BibliotecaApp {
     }
 
     public void printListOfBooks() {
-        printStream.println("The Lightning Thief \n Harry Potter \n Narnia");
+        String title = "Title";
+        String author = "Author";
+        String year = "Year Published";
+        String[] books = {"The Lightning Thief", "Harry Potter", "Narnia"};
+        String[] authors = {"Rick Riordan", "J.K. Rowling", "C.S. Lewis"};
+        String[] published = {"2005","1997","1950"};
+        printStream.printf("%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s",
+                                            title,author,year,
+                                            books[0],authors[0],published[0],
+                                            books[1],authors[1],published[1],
+                                            books[2],authors[2],published[2]);
     }
 
 
@@ -22,6 +32,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(System.out);
         bibliotecaApp.printWelcomeMessage();
+        bibliotecaApp.printListOfBooks();
     }
 
 }

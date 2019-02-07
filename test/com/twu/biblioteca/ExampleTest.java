@@ -31,6 +31,10 @@ public class ExampleTest {
         bibliotecaApp.printWelcomeMessage();
         bibliotecaApp.printListOfBooks();
 
-        verify(printStream).println("The Lightning Thief \n Harry Potter \n Narnia");
+        verify(printStream).printf("%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s",
+                                    "Title","Author","Year Published",
+                                    "The Lightning Thief","Rick Riordan","2005",
+                                    "Harry Potter","J.K. Rowling","1997",
+                                    "Narnia","C.S. Lewis","1950");
     }
 }
