@@ -1,27 +1,39 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 public class BibliotecaApp {
 
     private PrintStream printStream;
+    private ArrayList<LibraryBook> availableBooks;
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
+        this.availableBooks = new ArrayList<LibraryBook>();
+        LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
+        LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
+        LibraryBook bookThree = new LibraryBook("Narnia", "C.S. Lewis", 1950);
+        availableBooks.add(bookOne);
+        availableBooks.add(bookTwo);
+        availableBooks.add(bookThree);
     }
 
-    public void printListOfBooks() {
+    private String formatListOfBooks() {
         String title = "Title";
         String author = "Author";
         String year = "Year Published";
-        String[] books = {"The Lightning Thief", "Harry Potter", "Narnia"};
-        String[] authors = {"Rick Riordan", "J.K. Rowling", "C.S. Lewis"};
-        String[] published = {"2005","1997","1950"};
-        printStream.printf("%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s",
-                                            title,author,year,
-                                            books[0],authors[0],published[0],
-                                            books[1],authors[1],published[1],
-                                            books[2],authors[2],published[2]);
+        String formattedString = String.format("%-22s%-22s%-22s\n",title,author,year);
+        for (LibraryBook book:availableBooks) {
+            formattedString = formattedString + String.format("%-22s%-22s%-22d\n",
+                                book.getTitle(),book.getAuthor(),book.getYearPublished());
+        }
+        return formattedString;
+    }
+
+    public void printListOfBooks() {
+        String formattedString = this.formatListOfBooks();
+        printStream.printf(formattedString);
     }
 
 

@@ -31,10 +31,12 @@ public class ExampleTest {
         bibliotecaApp.printWelcomeMessage();
         bibliotecaApp.printListOfBooks();
 
-        verify(printStream).printf("%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s\n%-22s%-22s%-22s",
-                                    "Title","Author","Year Published",
-                                    "The Lightning Thief","Rick Riordan","2005",
-                                    "Harry Potter","J.K. Rowling","1997",
-                                    "Narnia","C.S. Lewis","1950");
+        String wantedString = String.format("%-22s%-22s%-22s\n%-22s%-22s%-22d\n%-22s%-22s%-22d\n%-22s%-22s%-22d\n",
+                "Title","Author","Year Published",
+                "The Lightning Thief","Rick Riordan",2005,
+                "Harry Potter","J.K. Rowling",1997,
+                "Narnia","C.S. Lewis",1950);
+
+        verify(printStream).printf(wantedString);
     }
 }
