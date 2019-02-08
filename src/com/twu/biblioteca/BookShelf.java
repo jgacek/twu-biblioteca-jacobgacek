@@ -38,4 +38,16 @@ public class BookShelf {
         }
         return "Sorry, that book is not available";
     }
+
+    public String returnBook(String bookTitle) {
+        for (LibraryBook book:allBooks) {
+            if (bookTitle.equals(book.getTitle())) {
+                if (book.isCheckedOut) {
+                    book.isCheckedOut = false;
+                    return "asdadas";
+                }
+            }
+        }
+        return "asdasd";
+    }
 }

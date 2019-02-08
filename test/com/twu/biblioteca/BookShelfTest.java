@@ -49,4 +49,21 @@ public class BookShelfTest {
 
         assertEquals("Thank you! Enjoy the book",bookShelf.checkOut("a"));
     }
+
+    @Test
+    public void shouldRedisplayBookAfterReturned() {
+        BookShelf bookShelf = new BookShelf();
+        bookShelf.addBook(new LibraryBook("a","a",1));
+
+        bookShelf.checkOut("a");
+        bookShelf.returnBook("a");
+
+        String title = "Title";
+        String author = "Author";
+        String year = "Year Published";
+        String expectedList = String.format("%-22s%-22s%-22s\n",title,author,year);
+        expectedList = expectedList + String.format("%-22s%-22s%-22d\n","a","a",1);
+
+        assertEquals(expectedList,bookShelf.availableBookList());
+    }
 }
