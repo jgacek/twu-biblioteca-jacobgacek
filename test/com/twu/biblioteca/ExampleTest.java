@@ -1,8 +1,13 @@
 package com.twu.biblioteca;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+import org.junit.Rule;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.mockito.Mockito.*;
 
@@ -24,12 +29,11 @@ public class ExampleTest {
     }
 
     @Test
-    public void shouldPrintListOfBooksAfterWelcomeMessage() {
+    public void shouldPrintListOfBooksAfterSelectingOption() {
         PrintStream printStream = mock(PrintStream.class);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream);
 
-        bibliotecaApp.printWelcomeMessage();
-        bibliotecaApp.printListOfBooks();
+        bibliotecaApp.verifySelectedOption("List of books");
 
         String wantedString = String.format("%-22s%-22s%-22s\n%-22s%-22s%-22d\n%-22s%-22s%-22d\n%-22s%-22s%-22d\n",
                 "Title","Author","Year Published",
@@ -39,4 +43,25 @@ public class ExampleTest {
 
         verify(printStream).printf(wantedString);
     }
+
+    @Test
+    public void shouldPrintMenu() {
+        PrintStream printStream = mock(PrintStream.class);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream);
+
+        bibliotecaApp.printMenu();
+
+        verify(printStream).print("List of books\n");
+    }
+
+    @Test
+    public void shouldPrintInvalidAfterChoosingInvalidOption() {
+        PrintStream printStream = mock(PrintStream.class);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream);
+
+        bibliotecaApp.verifySelectedOption("asd");
+
+        verify(printStream).println("Please select a valid option");
+    }
+
 }
