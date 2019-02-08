@@ -64,4 +64,10 @@ public class ExampleTest {
         verify(printStream).println("Please select a valid option");
     }
 
+    @Test
+    public void shouldRemoveBookFromListAfterCheckingOut() {
+        PrintStream printStream = mock(PrintStream.class);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(printStream);
+    }
+
 }
