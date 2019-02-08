@@ -37,6 +37,9 @@ public class BibliotecaApp {
         if (option.equals("List of books")) {
             printListOfBooks();
         }
+        if (option.equals("Quit")){
+            System.exit(0);
+        }
     }
 
     public void verifySelectedOption(String selectedOption){
