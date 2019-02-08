@@ -27,14 +27,15 @@ public class BookShelf {
         return listOfBooks;
     }
 
-    public void checkOut(String bookName){
+    public String checkOut(String bookName){
         for (LibraryBook book:allBooks) {
             if (!book.isCheckedOut){
                 if (bookName.equals(book.getTitle())){
                     book.isCheckedOut = true;
-                    return;
+                    return "Thank you! Enjoy the book";
                 }
             }
         }
+        return "Sorry, that book is not available";
     }
 }

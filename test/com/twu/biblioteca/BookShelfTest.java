@@ -33,4 +33,20 @@ public class BookShelfTest {
 
         assertEquals(expectedList,bookShelf.availableBookList());
     }
+
+    @Test
+    public void shouldFailToCheckOutWhenBookDoesntExist() {
+        BookShelf bookShelf = new BookShelf();
+        bookShelf.addBook(new LibraryBook("a","a",1));
+
+        assertEquals("Sorry, that book is not available",bookShelf.checkOut("b"));
+    }
+
+    @Test
+    public void shouldSucceedInCheckingOutBook() {
+        BookShelf bookShelf = new BookShelf();
+        bookShelf.addBook(new LibraryBook("a","a",1));
+
+        assertEquals("Thank you! Enjoy the book",bookShelf.checkOut("a"));
+    }
 }

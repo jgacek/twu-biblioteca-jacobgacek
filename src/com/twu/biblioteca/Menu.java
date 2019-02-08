@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 public class Menu {
-    private String[] menuOptions = {"List of books","Quit"};
+    private String[] menuOptions = {"List of books","Checkout <BookTitle>","Quit"};
 
     public boolean checkIfValidOption(String selectedOption) {
         for (String s:menuOptions) {

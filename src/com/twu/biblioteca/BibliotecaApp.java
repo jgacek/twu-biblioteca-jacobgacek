@@ -37,6 +37,10 @@ public class BibliotecaApp {
         if (option.equals("List of books")) {
             printListOfBooks();
         }
+        if (option.startsWith("Checkout")) {
+            String bookTitle = option.substring(7,option.length());
+
+        }
         if (option.equals("Quit")){
             System.exit(0);
         }
