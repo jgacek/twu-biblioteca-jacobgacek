@@ -11,6 +11,7 @@ public class BibliotecaApp {
     private PrintStream printStream;
     private BookShelf books;
     private Menu menu;
+    private Scanner keyboard = new Scanner(System.in);
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
@@ -31,29 +32,39 @@ public class BibliotecaApp {
 
     public void printMenu() {
         printStream.print(menu.printMenu());
+        waitForInput();
+    }
+
+    private void waitForInput() {
+        String option = this.keyboard.nextLine();
+        this.verifySelectedOption(option);
     }
 
     private void handleSelectedOption(String option) {
         if (option.equals("List of books")) {
             printListOfBooks();
         }
-        if (option.startsWith("Checkout ")) {
-            String bookTitle = option.substring(9);
-            printStream.println(this.books.checkOut(bookTitle));
+        if (option.startsWith("Checkout")) {
+            printStream.println("Which book would you like to checkout?");
+            String bookTitle = this.keyboard.nextLine();
+            printStream.println(books.checkOut(bookTitle));
 
         }
-        if (option.startsWith("Return ")) {
-            String bookTitle = option.substring(7);
-            printStream.println(this.books.returnBook(bookTitle));
+        if (option.startsWith("Return")) {
+            printStream.println("Which book would you like to return?");
+            String bookTitle = this.keyboard.nextLine();
+            printStream.println(books.returnBook(bookTitle));
         }
         if (option.equals("Quit")){
             System.exit(0);
         }
+        printMenu();
     }
 
     public void verifySelectedOption(String selectedOption){
         if (menu.checkIfValidOption(selectedOption) == false){
             printStream.println("Please select a valid option");
+            printMenu();
         } else {
             handleSelectedOption(selectedOption);
         }
