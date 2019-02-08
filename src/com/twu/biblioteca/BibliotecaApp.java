@@ -32,12 +32,6 @@ public class BibliotecaApp {
 
     public void printMenu() {
         printStream.print(menu.printMenu());
-        waitForInput();
-    }
-
-    private void waitForInput() {
-        String option = this.keyboard.nextLine();
-        this.verifySelectedOption(option);
     }
 
     private void handleSelectedOption(String option) {
@@ -78,6 +72,12 @@ public class BibliotecaApp {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(System.out);
         bibliotecaApp.printWelcomeMessage();
         bibliotecaApp.printMenu();
+        Scanner keyboard = new Scanner(System.in);
+        String option = keyboard.nextLine();
+        while(!option.equals("Quit")){
+            bibliotecaApp.verifySelectedOption(option);
+            option = keyboard.nextLine();
+        }
     }
 
 }
