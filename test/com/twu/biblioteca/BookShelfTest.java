@@ -66,4 +66,21 @@ public class BookShelfTest {
 
         assertEquals(expectedList,bookShelf.availableBookList());
     }
+
+    @Test
+    public void shouldSucceedInReturningBook() {
+        BookShelf bookShelf = new BookShelf();
+        bookShelf.addBook(new LibraryBook("a","a",1));
+
+        bookShelf.checkOut("a");
+        assertEquals("Thank you for returning the book",bookShelf.returnBook("a"));
+    }
+
+    @Test
+    public void shouldFailInReturningBook() {
+        BookShelf bookShelf = new BookShelf();
+        bookShelf.addBook(new LibraryBook("a","a",1));
+
+        assertEquals("That is not a valid book to return",bookShelf.returnBook("a"));
+    }
 }

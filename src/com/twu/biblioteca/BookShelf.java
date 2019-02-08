@@ -44,10 +44,10 @@ public class BookShelf {
             if (bookTitle.equals(book.getTitle())) {
                 if (book.isCheckedOut) {
                     book.isCheckedOut = false;
-                    return "asdadas";
+                    return "Thank you for returning the book";
                 }
             }
         }
-        return "asdasd";
+        return "That is not a valid book to return";
     }
 }
