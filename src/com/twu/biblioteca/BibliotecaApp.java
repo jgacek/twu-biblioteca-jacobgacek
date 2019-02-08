@@ -10,11 +10,12 @@ public class BibliotecaApp {
 
     private PrintStream printStream;
     private BookShelf books;
-    private final String[] menuOptions = {"List of books"};
+    private Menu menu;
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
         this.books = new BookShelf();
+        this.menu = new Menu();
         LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
         LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
         LibraryBook bookThree = new LibraryBook("Narnia", "C.S. Lewis", 1950);
@@ -29,20 +30,7 @@ public class BibliotecaApp {
     }
 
     public void printMenu() {
-        String output = "";
-        for (String s:menuOptions) {
-            output = output + s + "\n";
-        }
-        printStream.print(output);
-    }
-
-    private boolean checkIfOptionIsValid(String selectedOption){
-        for (String s:menuOptions) {
-            if (selectedOption.equals(s)) {
-                return true;
-            }
-        }
-        return false;
+        printStream.print(menu.printMenu());
     }
 
     private void handleSelectedOption(String option) {
@@ -52,7 +40,7 @@ public class BibliotecaApp {
     }
 
     public void verifySelectedOption(String selectedOption){
-        if (checkIfOptionIsValid(selectedOption) == false){
+        if (menu.checkIfValidOption(selectedOption) == false){
             printStream.println("Please select a valid option");
         } else {
             handleSelectedOption(selectedOption);
