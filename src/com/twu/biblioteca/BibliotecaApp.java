@@ -1,32 +1,29 @@
 package com.twu.biblioteca;
 
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
 
     private PrintStream printStream;
-    private BookShelf books;
+    private Shelf books;
     private Menu menu;
     private Scanner keyboard = new Scanner(System.in);
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
-        this.books = new BookShelf();
+        this.books = new Shelf();
         this.menu = new Menu();
         LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
         LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
         LibraryBook bookThree = new LibraryBook("Narnia", "C.S. Lewis", 1950);
-        books.addBook(bookOne);
-        books.addBook(bookTwo);
-        books.addBook(bookThree);
+        books.addItem(bookOne);
+        books.addItem(bookTwo);
+        books.addItem(bookThree);
     }
 
     public void printListOfBooks() {
-        String formattedString = this.books.availableBookList();
+        String formattedString = this.books.availableItems();
         printStream.printf(formattedString);
     }
 
@@ -47,7 +44,7 @@ public class BibliotecaApp {
         if (option.startsWith("Return")) {
             printStream.println("Which book would you like to return?");
             String bookTitle = this.keyboard.nextLine();
-            printStream.println(books.returnBook(bookTitle));
+            printStream.println(books.returnItem(bookTitle));
         }
         if (option.equals("Quit")){
             System.exit(0);
