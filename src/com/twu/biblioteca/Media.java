@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 public class Media {
     public boolean isCheckedOut;
+    public User checkedOutBy;
     protected String title;
     protected int year;
     protected String author;
@@ -10,6 +11,7 @@ public class Media {
         this.title = title;
         this.year = year;
         this.isCheckedOut = false;
+        this.checkedOutBy = null;
         this.author = author;
     }
 

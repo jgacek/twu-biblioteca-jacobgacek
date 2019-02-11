@@ -11,12 +11,17 @@ public class BibliotecaApp {
     private Shelf movies;
     private Menu menu;
     private Scanner keyboard = new Scanner(System.in);
+    private User currentUser;
+    private ArrayList<User> allUsers;
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
         this.books = new Shelf(new ArrayList<LibraryBook>());
         this.movies = new Shelf(new ArrayList<Movie>());
         this.menu = new Menu();
+        this.currentUser = new User("Test User");
+        this.allUsers = new ArrayList<User>();
+        this.allUsers.add(currentUser);
         LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
         LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
         LibraryBook bookThree = new LibraryBook("Narnia", "C.S. Lewis", 1950);
@@ -58,11 +63,11 @@ public class BibliotecaApp {
             if (title.equals("book")) {
                 printStream.println("Which book would you like to checkout");
                 title = this.keyboard.nextLine();
-                printStream.println(books.checkOut(title));
+                printStream.println(books.checkOut(title,currentUser));
             } else if (title.equals("movie")) {
                 printStream.println("Which movie would you like to checkout");
                 title = this.keyboard.nextLine();
-                printStream.println(movies.checkOut(title));
+                printStream.println(movies.checkOut(title,currentUser));
             }
         }
         if (option.startsWith("Return")) {
@@ -77,6 +82,9 @@ public class BibliotecaApp {
                 title = this.keyboard.nextLine();
                 printStream.println(movies.returnItem(title));
             }
+        }
+        if (option.startsWith("My items")) {
+            printStream.printf(currentUser.myItems());
         }
         if (option.equals("Quit")){
             System.exit(0);

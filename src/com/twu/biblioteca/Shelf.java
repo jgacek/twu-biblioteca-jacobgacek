@@ -31,11 +31,13 @@ public class Shelf<T extends Media> {
         return listOfItems;
     }
 
-    public String checkOut(String itemName){
+    public String checkOut(String itemName, User user){
         for (Media item: allItems) {
             if (!item.isCheckedOut){
                 if (itemName.equals(item.getTitle())){
                     item.isCheckedOut = true;
+                    user.addItemToMyList(item);
+                    item.checkedOutBy = user;
                     return "Thank you! Enjoy the item";
                 }
             }
@@ -48,6 +50,8 @@ public class Shelf<T extends Media> {
             if (itemTitle.equals(item.getTitle())) {
                 if (item.isCheckedOut) {
                     item.isCheckedOut = false;
+                    item.checkedOutBy.returnItemFromList(item);
+                    item.checkedOutBy = null;
                     return "Thank you for returning the item";
                 }
             }

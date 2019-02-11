@@ -27,7 +27,7 @@ public class ShelfTest {
         Shelf bookShelf = new Shelf(new ArrayList<LibraryBook>());
         bookShelf.addItem(new LibraryBook("a","a",1));
 
-        bookShelf.checkOut("a");
+        bookShelf.checkOut("a",new User("a"));
         String title = "Title";
         String author = "Author";
         String year = "Year";
@@ -41,7 +41,7 @@ public class ShelfTest {
         Shelf bookShelf = new Shelf(new ArrayList<LibraryBook>());
         bookShelf.addItem(new LibraryBook("a","a",1));
 
-        assertEquals("Sorry, that book is not available",bookShelf.checkOut("b"));
+        assertEquals("Sorry, that book is not available",bookShelf.checkOut("b",new User("b")));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ShelfTest {
         Shelf bookShelf = new Shelf(new ArrayList<LibraryBook>());
         bookShelf.addItem(new LibraryBook("a","a",1));
 
-        assertEquals("Thank you! Enjoy the book",bookShelf.checkOut("a"));
+        assertEquals("Thank you! Enjoy the book",bookShelf.checkOut("a",new User("a")));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ShelfTest {
         Shelf bookShelf = new Shelf(new ArrayList<LibraryBook>());
         bookShelf.addItem(new LibraryBook("a","a",1));
 
-        bookShelf.checkOut("a");
+        bookShelf.checkOut("a",new User("a"));
         bookShelf.returnItem("a");
 
         String title = "Title";
@@ -74,7 +74,7 @@ public class ShelfTest {
         Shelf bookShelf = new Shelf(new ArrayList<LibraryBook>());
         bookShelf.addItem(new LibraryBook("a","a",1));
 
-        bookShelf.checkOut("a");
+        bookShelf.checkOut("a",new User("a"));
         assertEquals("Thank you for returning the book",bookShelf.returnItem("a"));
     }
 
