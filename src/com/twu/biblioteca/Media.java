@@ -24,4 +24,16 @@ public class Media {
     public String getAuthor() {
         return this.author;
     }
+
+    public String printInfo() {
+        return "";
+    }
+
+    public String unavailable() {
+        return "";
+    }
+
+    public String notValid() {
+        return "";
+    }
 }

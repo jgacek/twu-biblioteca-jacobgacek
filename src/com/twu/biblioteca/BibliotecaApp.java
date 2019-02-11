@@ -1,18 +1,21 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
 
     private PrintStream printStream;
     private Shelf books;
+    private Shelf movies;
     private Menu menu;
     private Scanner keyboard = new Scanner(System.in);
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
-        this.books = new Shelf();
+        this.books = new Shelf(new ArrayList<LibraryBook>());
+        this.movies = new Shelf(new ArrayList<Movie>());
         this.menu = new Menu();
         LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
         LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
@@ -20,10 +23,21 @@ public class BibliotecaApp {
         books.addItem(bookOne);
         books.addItem(bookTwo);
         books.addItem(bookThree);
+        Movie movieOne = new Movie("The Lord of the Rings","Peter Jackson",2001,9);
+        Movie movieTwo = new Movie("The Godfather","Francis Ford Coppola",1972,9);
+        Movie movieThree = new Movie("Tangled","Byron Howard",2010,8);
+        movies.addItem(movieOne);
+        movies.addItem(movieTwo);
+        movies.addItem(movieThree);
     }
 
     public void printListOfBooks() {
         String formattedString = this.books.availableItems();
+        printStream.printf(formattedString);
+    }
+
+    public void printListOfMovies() {
+        String formattedString = this.movies.availableItems();
         printStream.printf(formattedString);
     }
 
@@ -35,16 +49,34 @@ public class BibliotecaApp {
         if (option.equals("List of books")) {
             printListOfBooks();
         }
+        if (option.equals("List of movies")) {
+            printListOfMovies();
+        }
         if (option.startsWith("Checkout")) {
-            printStream.println("Which book would you like to checkout?");
-            String bookTitle = this.keyboard.nextLine();
-            printStream.println(books.checkOut(bookTitle));
-
+            printStream.println("Would you like to checkout a book or a movie?");
+            String title = this.keyboard.nextLine();
+            if (title.equals("book")) {
+                printStream.println("Which book would you like to checkout");
+                title = this.keyboard.nextLine();
+                printStream.println(books.checkOut(title));
+            } else if (title.equals("movie")) {
+                printStream.println("Which movie would you like to checkout");
+                title = this.keyboard.nextLine();
+                printStream.println(movies.checkOut(title));
+            }
         }
         if (option.startsWith("Return")) {
-            printStream.println("Which book would you like to return?");
-            String bookTitle = this.keyboard.nextLine();
-            printStream.println(books.returnItem(bookTitle));
+            printStream.println("Would you like to return a book or a movie");
+            String title = this.keyboard.nextLine();
+            if (title.equals("book")) {
+                printStream.println("Which book would you like to return");
+                title = this.keyboard.nextLine();
+                printStream.println(books.returnItem(title));
+            } else if (title.equals("movie")) {
+                printStream.println("Which movie would you like to return");
+                title = this.keyboard.nextLine();
+                printStream.println(movies.returnItem(title));
+            }
         }
         if (option.equals("Quit")){
             System.exit(0);
