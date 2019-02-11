@@ -13,6 +13,10 @@ public class User {
         this.myMovies = new ArrayList<Movie>();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void addItemToMyList(Media media) {
         if (media instanceof LibraryBook) {
             addBookToMyBooks((LibraryBook) media);

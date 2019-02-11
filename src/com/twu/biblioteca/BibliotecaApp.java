@@ -13,6 +13,7 @@ public class BibliotecaApp {
     private Scanner keyboard = new Scanner(System.in);
     private User currentUser;
     private ArrayList<User> allUsers;
+    private Librarian librarian;
 
     public BibliotecaApp(PrintStream printStream){
         this.printStream = printStream;
@@ -22,6 +23,9 @@ public class BibliotecaApp {
         this.currentUser = new User("Test User");
         this.allUsers = new ArrayList<User>();
         this.allUsers.add(currentUser);
+        this.allUsers.add(new User("Test User 2"));
+        this.librarian = new Librarian("Test Librarian",allUsers);
+        this.allUsers.add(librarian);
         LibraryBook bookOne = new LibraryBook("The Lightning Thief","Rick Riordan", 2005);
         LibraryBook bookTwo = new LibraryBook("Harry Potter", "J.K. Rowling", 1997);
         LibraryBook bookThree = new LibraryBook("Narnia", "C.S. Lewis", 1950);
@@ -85,6 +89,23 @@ public class BibliotecaApp {
         }
         if (option.startsWith("My items")) {
             printStream.printf(currentUser.myItems());
+        }
+        if (option.equals("Switch user")) {
+            printStream.println("Please type in name of user");
+            String newUser = this.keyboard.nextLine();
+            for (User u : allUsers) {
+                if (u.getName().equals(newUser)) {
+                    this.currentUser = u;
+                    break;
+                }
+            }
+        }
+        if (option.equals("Print checked out items")) {
+            if (currentUser instanceof Librarian) {
+                printStream.printf(((Librarian) currentUser).printAllCheckedOutItems());
+            } else {
+                printStream.println("Sorry only librarians have access to this funciton");
+            }
         }
         if (option.equals("Quit")){
             System.exit(0);

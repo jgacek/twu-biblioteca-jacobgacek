@@ -51,7 +51,7 @@ public class ExampleTest {
 
         bibliotecaApp.printMenu();
 
-        verify(printStream).print("List of books\nList of movies\nCheckout\nCheckout movie\nReturn\nQuit\n");
+        verify(printStream).print("List of books\nList of movies\nCheckout\nReturn\nMy items\nSwitch user\nPrint checked out items\nQuit\n");
     }
 
     @Test
